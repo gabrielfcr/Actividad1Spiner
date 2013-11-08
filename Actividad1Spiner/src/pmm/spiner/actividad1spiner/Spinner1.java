@@ -3,6 +3,7 @@ package pmm.spiner.actividad1spiner;
 import android.R.anim;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +26,7 @@ public class Spinner1 extends Activity {
 		tv = (TextView)findViewById(R.id.miTView1);
 		et1 = (EditText)findViewById(R.id.miEtext1);
 		et2 = (EditText)findViewById(R.id.miEtext2);
+		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, datos);
 //		Indicamos el tipo de Spinner dropdown
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -33,23 +35,26 @@ public class Spinner1 extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, android.view.View v,int position, long id) {
 				//Hacemos lo que sea al seleccionar una opción
-				String seleccion =  parent.getItemAtPosition(position).toString();
 				int result = 0, num1, num2;
-				num1 = Integer.valueOf((et1.getText().toString()));
-				num2 = Integer.valueOf((et2.getText().toString()));
-				switch(position){
-				case 0:
-					result = num1 + num2;
-					break;
-				case 1:
-					result = num1 - num2;
-					break;
-				case 2:
-					result = num1 * num2;
-					break;
-				case 3:
-					result = num1 / num2;
-					break;
+				//Log.d("Hola", "Error"+ et1.getText().toString());
+				if(!et1.getText().toString().equals("") && !et2.getText().toString().equals("")){
+					//Log.d("Hola", "Error");
+					num1 = Integer.valueOf((et1.getText().toString()));
+					num2 = Integer.valueOf((et2.getText().toString()));
+					switch(position){
+					case 0:
+						result = num1 + num2;
+						break;
+					case 1:
+						result = num1 - num2;
+						break;
+					case 2:
+						result = num1 * num2;
+						break;
+					case 3:
+						result = num1 / num2;
+						break;
+					}
 				}
 				tv.setText("ha seleccionado: "+String.valueOf(result));
 			}
